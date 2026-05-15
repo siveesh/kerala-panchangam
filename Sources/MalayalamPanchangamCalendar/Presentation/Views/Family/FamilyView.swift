@@ -1,4 +1,6 @@
 import SwiftUI
+import AppKit
+import UniformTypeIdentifiers
 
 // MARK: - FamilyView
 
@@ -12,6 +14,7 @@ struct FamilyView: View {
     @State private var showDeleteAlert = false
     @State private var showScheduleConfirmation = false
     @State private var showRemindersConfirmation = false
+    @State private var showingImportConfirm = false
 
     var body: some View {
         HSplitView {
@@ -47,6 +50,53 @@ struct FamilyView: View {
             Text("Family birthday and Śrāddham reminders have been saved to the Reminders page and OS notifications scheduled.")
         }
         .task { await viewModel.loadProfiles() }
+        // Export: present save panel when exportedFileURL is set
+        .onChange(of: viewModel.exportedFileURL) { _, url in
+            guard let url else { return }
+            NSSavePanel.saveCopy(of: url, suggestedName: url.lastPathComponent)
+            viewModel.exportedFileURL = nil
+        }
+        // Import: file picker
+        .fileImporter(
+            isPresented: $viewModel.showingImportFilePicker,
+            allowedContentTypes: [.json],
+            allowsMultipleSelection: false
+        ) { result in
+            switch result {
+            case .success(let urls):
+                guard let url = urls.first else { return }
+                showingImportConfirm = true
+                Task { @MainActor in
+                    viewModel.pendingImportURL = url
+                }
+            case .failure(let error):
+                viewModel.importExportError = error.localizedDescription
+                viewModel.showingImportError = true
+            }
+        }
+        // Import confirmation alert
+        .alert("Replace All Profiles?", isPresented: $showingImportConfirm) {
+            Button("Replace", role: .destructive) {
+                if let url = viewModel.pendingImportURL {
+                    Task { await viewModel.importBackup(from: url) }
+                }
+            }
+            Button("Cancel", role: .cancel) { viewModel.pendingImportURL = nil }
+        } message: {
+            Text("This will replace ALL existing profiles with the ones in the backup file. This cannot be undone.")
+        }
+        // Export error
+        .alert("Export Failed", isPresented: $viewModel.showingExportError) {
+            Button("OK", role: .cancel) { viewModel.showingExportError = false }
+        } message: {
+            Text(viewModel.importExportError ?? "Unknown error")
+        }
+        // Import error
+        .alert("Import Failed", isPresented: $viewModel.showingImportError) {
+            Button("OK", role: .cancel) { viewModel.showingImportError = false }
+        } message: {
+            Text(viewModel.importExportError ?? "Unknown error")
+        }
         // Load the selected profile into draft when the sidebar selection changes
         .onChange(of: viewModel.selectedProfileID) { _, newID in
             guard let id = newID,
@@ -66,6 +116,20 @@ struct FamilyView: View {
                     .font(.headline)
                     .padding(.leading, 8)
                 Spacer()
+
+                Button {
+                    Task { await viewModel.exportBackup() }
+                } label: {
+                    Image(systemName: "arrow.up.doc")
+                }
+                .help("Export profiles backup")
+
+                Button {
+                    viewModel.showingImportFilePicker = true
+                } label: {
+                    Image(systemName: "arrow.down.doc")
+                }
+                .help("Restore profiles from backup")
 
                 Button {
                     viewModel.startNewProfile()
@@ -307,4 +371,19 @@ struct FamilyView: View {
 
 private extension ShraddhamDate {
     var date: Date { gregorianDate }
+}
+
+// MARK: - NSSavePanel helper
+
+private extension NSSavePanel {
+    static func saveCopy(of sourceURL: URL, suggestedName: String) {
+        let panel = NSSavePanel()
+        panel.nameFieldStringValue = suggestedName
+        panel.allowedContentTypes = [.json]
+        panel.message = "Choose where to save your profiles backup"
+        panel.begin { response in
+            guard response == .OK, let dest = panel.url else { return }
+            try? FileManager.default.copyItem(at: sourceURL, to: dest)
+        }
+    }
 }

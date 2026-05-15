@@ -5,6 +5,10 @@ import Foundation
 protocol FamilyStoring: Sendable {
     func loadProfiles() async throws -> [PersonProfile]
     func saveProfiles(_ profiles: [PersonProfile]) async throws
+
+    // MARK: Backup / Restore
+    func exportBackup() async throws -> Data
+    func importBackup(_ data: Data) async throws -> [PersonProfile]
 }
 
 // MARK: - FamilyEventGenerating

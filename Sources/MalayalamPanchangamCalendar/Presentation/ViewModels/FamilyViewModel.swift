@@ -29,6 +29,13 @@ final class FamilyViewModel {
     var isLoading = false
     var errorMessage: String?
 
+    var showingExportError = false
+    var showingImportError = false
+    var importExportError: String?
+    var exportedFileURL: URL?          // set after successful export so the view can present a ShareLink / save panel
+    var showingImportFilePicker = false
+    var pendingImportURL: URL?
+
     // MARK: - Synced from CalendarViewModel
 
     var days: [PanchangamDay] = []
@@ -582,6 +589,47 @@ final class FamilyViewModel {
         // Rebuild the date-keyed event map in the background so calendar cells
         // can show yellow event labels without blocking the main thread.
         Task { await refreshFamilyEventDates() }
+    }
+
+    // MARK: - Backup / Restore
+
+    func exportBackup() async {
+        do {
+            let data = try await store.exportBackup()
+            // Write to a temp file; the view will present a save/share sheet
+            let tmp = FileManager.default.temporaryDirectory
+                .appendingPathComponent("SiveeshCalendar-Profiles-\(formattedDate()).json")
+            try data.write(to: tmp)
+            exportedFileURL = tmp
+        } catch {
+            importExportError = error.localizedDescription
+            showingExportError = true
+        }
+    }
+
+    func importBackup(from url: URL) async {
+        guard url.startAccessingSecurityScopedResource() else {
+            importExportError = "Could not access the selected file."
+            showingImportError = true
+            return
+        }
+        defer { url.stopAccessingSecurityScopedResource() }
+        do {
+            let data = try Data(contentsOf: url)
+            let restored = try await store.importBackup(data)
+            profiles = restored
+            selectedProfileID = nil
+            refreshHighlights()
+        } catch {
+            importExportError = "Import failed: \(error.localizedDescription)"
+            showingImportError = true
+        }
+    }
+
+    private func formattedDate() -> String {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd"
+        return f.string(from: Date())
     }
 
     // MARK: - Family Event Date Map

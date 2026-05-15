@@ -108,6 +108,26 @@ actor FamilyStore: FamilyStoring {
         }
     }
 
+    // MARK: Backup / Restore
+
+    /// Returns a plain-JSON Data blob of all profiles — suitable for saving to a user-chosen file.
+    /// The data is NOT encrypted so it can be restored even after a clean reinstall.
+    func exportBackup() async throws -> Data {
+        let profiles = try await loadProfiles()
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        encoder.dateEncodingStrategy = .iso8601
+        return try encoder.encode(profiles)
+    }
+
+    /// Decodes profiles from a plain-JSON backup file and REPLACES all existing profiles.
+    /// Throws if the data cannot be decoded as `[PersonProfile]`.
+    func importBackup(_ data: Data) async throws -> [PersonProfile] {
+        let profiles = try Self.decodeProfiles(from: data)
+        try await saveProfiles(profiles)
+        return profiles
+    }
+
     // MARK: - Private helpers
 
     private static func decodeProfiles(from data: Data) throws -> [PersonProfile] {
