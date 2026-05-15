@@ -32,30 +32,23 @@ struct MalayalamPanchangamDayProvider: TimelineProvider {
     // MARK: - Data loading
 
     private func loadSnapshot() -> PanchangamDaySnapshot {
-        // Build candidate URLs: App Group container first, then direct fallback path
-        var candidates: [URL] = []
-
+        // App Group container (preferred — works when properly provisioned)
         if let base = FileManager.default.containerURL(
                 forSecurityApplicationGroupIdentifier: "group.com.malayalampanchangam.calendar") {
-            candidates.append(
-                base
-                    .appending(path: "MalayalamPanchangamCalendar", directoryHint: .isDirectory)
-                    .appending(path: "WidgetDaySnapshot.json")
-            )
-        }
-
-        // Direct fallback — works when App Group sandbox read is blocked on dev-signed builds
-        let home = FileManager.default.homeDirectoryForCurrentUser
-        candidates.append(
-            home
-                .appendingPathComponent("Library/Group Containers/group.com.malayalampanchangam.calendar/MalayalamPanchangamCalendar/WidgetDaySnapshot.json")
-        )
-
-        for url in candidates {
+            let url = base
+                .appending(path: "MalayalamPanchangamCalendar", directoryHint: .isDirectory)
+                .appending(path: "WidgetDaySnapshot.json")
             if let data = try? Data(contentsOf: url),
                let snapshot = try? JSONDecoder().decode(PanchangamDaySnapshot.self, from: data) {
                 return snapshot
             }
+        }
+        // Direct path fallback for dev-signed builds (no provisioning profile)
+        let direct = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Library/Group Containers/group.com.malayalampanchangam.calendar/MalayalamPanchangamCalendar/WidgetDaySnapshot.json")
+        if let data = try? Data(contentsOf: direct),
+           let snapshot = try? JSONDecoder().decode(PanchangamDaySnapshot.self, from: data) {
+            return snapshot
         }
         return .placeholder
     }
