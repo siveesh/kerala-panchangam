@@ -1,0 +1,914 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = { };
+	objectVersion = 56;
+	objects = {
+		/* KeralaHolidays.swift */ AABBCC001122334455667799 = {isa = PBXBuildFile; fileRef = AABBCC001122334455667788; };
+		/* YearCalendarView.swift */ AABBCC001122334455667811 = {isa = PBXBuildFile; fileRef = AABBCC001122334455667800; };
+		/* WeekCalendarView.swift */ AABBCC001122334455667833 = {isa = PBXBuildFile; fileRef = AABBCC001122334455667822; };
+		/* GrahanilaTypes.swift */ AABBCC001122334455668001 = {isa = PBXBuildFile; fileRef = AABBCC001122334455668000; };
+		/* PlanetaryCalculator.swift */ AABBCC001122334455668003 = {isa = PBXBuildFile; fileRef = AABBCC001122334455668002; };
+		/* GrahanilaCalculationService.swift */ AABBCC001122334455668005 = {isa = PBXBuildFile; fileRef = AABBCC001122334455668004; };
+		/* GrahanilaViewModel.swift */ AABBCC001122334455668007 = {isa = PBXBuildFile; fileRef = AABBCC001122334455668006; };
+		/* GrahanilaChartView.swift */ AABBCC001122334455668009 = {isa = PBXBuildFile; fileRef = AABBCC001122334455668008; };
+		/* NakshatraOccurrenceTypes.swift */ AABBCC001122334455668011 = {isa = PBXBuildFile; fileRef = AABBCC001122334455668010; };
+		/* NakshatraOccurrenceAnalyzer.swift */ AABBCC001122334455668013 = {isa = PBXBuildFile; fileRef = AABBCC001122334455668012; };
+		/* Assets.xcassets */ AABBCC001122334455667855 = {isa = PBXBuildFile; fileRef = AABBCC001122334455667844; };
+		/* FamilyTypes.swift */ FAFAMILY0000000000000002 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000001; };
+		/* FamilyStoring.swift */ FAFAMILY0000000000000004 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000003; };
+		/* FamilyStore.swift */ FAFAMILY0000000000000006 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000005; };
+		/* PersonalGrahanilaService.swift */ FAFAMILY0000000000000008 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000007; };
+		/* ShraddhamDateFinder.swift */ FAFAMILY0000000000000010 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000009; };
+		/* FamilyEventGenerator.swift */ FAFAMILY0000000000000012 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000011; };
+		/* HoroscopeExporter.swift */ FAFAMILY0000000000000014 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000013; };
+		/* FamilyViewModel.swift */ FAFAMILY0000000000000016 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000015; };
+		/* FamilyView.swift */ FAFAMILY0000000000000018 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000017; };
+		/* PersonFormView.swift */ FAFAMILY0000000000000020 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000019; };
+		/* ManualGrahanilaEditorView.swift */ FAFAMILY0000000000000022 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000021; };
+		/* HoroscopeExportView.swift */ FAFAMILY0000000000000024 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000023; };
+		/* KeychainEncryptionManager.swift */ FAFAMILY0000000000000026 = {isa = PBXBuildFile; fileRef = FAFAMILY0000000000000025; };
+		03D6F1C3BA8CD70E2EFE29BA = {isa = PBXBuildFile;
+			fileRef = AA516A3CB9778F271FA81A7A;
+		};
+		FDAE348BA76A4B2D582273C7 = {isa = PBXBuildFile;
+			fileRef = 3B86E185A531805DED06452E;
+		};
+		9F648E1A70BAF3FFB6ECA757 = {isa = PBXBuildFile;
+			fileRef = A7223A8FEFF7341D4CE3C2AC;
+		};
+		C8347C8D6290DFF55E3BF252 = {isa = PBXBuildFile;
+			fileRef = 9305E123FCA4E1F3F11B56B0;
+		};
+		2E5D3C69955BFD6D0429A893 = {isa = PBXBuildFile;
+			fileRef = A19C219E26B4A3F1641A033C;
+		};
+		A26CC568112DE49BF98EC591 = {isa = PBXBuildFile;
+			fileRef = C36217A7FEFDC0220112232C;
+		};
+		F9BEBBA322A048CCCCB3048F = {isa = PBXBuildFile;
+			fileRef = 8E2EB297E2866CCFC29CE569;
+		};
+		561CAC2669DA110E93C80863 = {isa = PBXBuildFile;
+			fileRef = 5D4683F835EB9F1B4A0E0A6F;
+		};
+		3DB1CF711A0A76177AD28E97 = {isa = PBXBuildFile;
+			fileRef = 656140D97F2259C9FE7C3A8A;
+		};
+		C5ACD4089A1B1E2A843844BE = {isa = PBXBuildFile;
+			fileRef = D2947D4BD3DE0C1035F23926;
+		};
+		BE1AF7427C0039D93EE7ED99 = {isa = PBXBuildFile;
+			fileRef = 254F0D5C898DEAF2C1CB47CB;
+		};
+		12D8174A532CD3E95654D81D = {isa = PBXBuildFile;
+			fileRef = 04B7E0082FEE37CD499E9988;
+		};
+		CF38926D87D0B1BB69582950 = {isa = PBXBuildFile;
+			fileRef = D70D8782C7BB4530595A204C;
+		};
+		8211DA7BE3E05F64DF4C2A80 = {isa = PBXBuildFile;
+			fileRef = 9F8EB42EF6C07B8CBA89EF47;
+		};
+		E851722A768FC3AAF342F365 = {isa = PBXBuildFile;
+			fileRef = BFD4C3315EFEB1701DD0251D;
+		};
+		50B3B6360C454B36E5EA9F8E = {isa = PBXBuildFile;
+			fileRef = EB59F10BA0CA2DEBF12A8045;
+		};
+		FBA38778871517D066B07D27 = {isa = PBXBuildFile;
+			fileRef = 894BC4A103854B6D8754F166;
+		};
+		ABE08EA434A2822EE7E76B65 = {isa = PBXBuildFile;
+			fileRef = A80842D8A098AF6212875FD4;
+		};
+		44DB432476AA5841A06B6EF8 = {isa = PBXBuildFile;
+			fileRef = D67E077299B8374FCFF0164D;
+		};
+		AE3FBFBECF0600FE7FFC5124 = {isa = PBXBuildFile;
+			fileRef = E7456707AD307C7EF2532E34;
+		};
+		0B56BA35989CC4BD2B1617B8 = {isa = PBXBuildFile;
+			fileRef = 7F23B751EF2007B43C55F546;
+		};
+		CD3E540CE32752BBE329D0C4 = {isa = PBXBuildFile;
+			fileRef = FEFBAD29AAFB7DB7643AE45F;
+		};
+		F94AF1014E4D434683ACDDC1 = {isa = PBXBuildFile;
+			fileRef = 431A1BC737AB6F73BC8BEA6C;
+		};
+		CD472C7F4281497D9BBAAF0F = {isa = PBXBuildFile;
+			fileRef = 7657D820EEF69B87B80D1A2E;
+		};
+		304FB4A393781C602210C685 = {isa = PBXBuildFile;
+			fileRef = 32AD832D8D644429A5CE5068;
+		};
+		1FD1B3FFCBA9897831C432F3 = {isa = PBXBuildFile;
+			fileRef = D7D38E1A58A85DA91A630196;
+		};
+		AC328EB05E55461D25055357 = {isa = PBXBuildFile;
+			fileRef = 58E1FDE37E235201E713235D;
+		};
+		F41674A78F4AEA59D07C7690 = {isa = PBXBuildFile;
+			fileRef = 25739D65716A3F63112507C1;
+		};
+		3FE7ADC8CD5D3883EC96F135 = {isa = PBXBuildFile;
+			fileRef = 38B943606A5DC6F0B933D470;
+		};
+		2221AE12823E589F222F27E2 = {isa = PBXBuildFile;
+			fileRef = 99F3982C0E04426362F30029;
+		};
+		5B94F23EEF6DFEC55DE6D667 = {isa = PBXBuildFile;
+			fileRef = 0F005D345FBE9A28AD036C3E;
+		};
+		8FD4F47BCE123D6106DCE116 = {isa = PBXBuildFile;
+			fileRef = 63750463B4F2E7144B8DC8BA;
+		};
+		17BF4755975AD3688B0B2997 = {isa = PBXBuildFile;
+			fileRef = F1AAD6BE15E7EB82B8E69535;
+		};
+		0BE1232DC1AF5EBA349B3DBB = {isa = PBXBuildFile;
+			fileRef = BB4B6512ACA78B0B74B42438;
+		};
+		F3551D489B832B75581D97D0 = {isa = PBXBuildFile;
+			fileRef = 548BF8B9A1851188AB9E216F;
+		};
+		C5B11CF9B4638C5016C2A230 = {isa = PBXBuildFile;
+			fileRef = 06EFEAF4B546DEB64534CDF6;
+		};
+		7A39F41BD99295B1B1C05A20 = {isa = PBXBuildFile;
+			fileRef = 99C88164E67519C74496F301;
+		};
+		41576ED45A65419D5CF31F30 = {isa = PBXBuildFile;
+			fileRef = E58017DCB5B0F980E9153025;
+		};
+		472E5FB1A4D1FBD0C6A5368C = {isa = PBXBuildFile;
+			fileRef = 61F5EFA98C8387E4ADF41C2E;
+		};
+		2E4844AC503E96A81A4D03B3 = {isa = PBXBuildFile;
+			fileRef = 9585A1A134CE7E95C0A5F70A;
+		};
+		48D798263B05C0EE4675F740 = {isa = PBXBuildFile;
+			fileRef = 58106F7C4B088B94D3C39B4A;
+		};
+		562A726F7475B38AC4C32818 = {isa = PBXBuildFile;
+			fileRef = C562CF3A7E15C9750B418884;
+		};
+		62D86478A12EE56A5CE82078 = {isa = PBXBuildFile;
+			fileRef = 5C0E4375090AAA8A6BAB9ED7;
+		};
+		2D6857F0D686CA4F6286404C = {isa = PBXBuildFile;
+			fileRef = 16823C1D99AD4E32088F9B6F;
+		};
+		D04B6ACBBCA8F5E5AE15440E = {isa = PBXBuildFile;
+			fileRef = 939971B2DD39C7B042B13DEA;
+		};
+		2BB9A32AF13557804008210C = {isa = PBXBuildFile;
+			fileRef = 0CA6918E37B7A9854775E3A4;
+		};
+		38EF5805A4141286F8C362DE = {isa = PBXBuildFile;
+			fileRef = 297F59D5D1F7FB5B8770027A;
+		};
+		A28D54D883208F7752E27BAA = {isa = PBXBuildFile;
+			fileRef = 2518A3C3E0C5E7B4A614BF94;
+		};
+		AF321348A2176BA6B892C9AF = {isa = PBXBuildFile;
+			fileRef = 8AF059E838352B4ADE02058F;
+		};
+		0507AFE199147EFE6B22CEC5 = {isa = PBXBuildFile;
+			fileRef = F22E9F166F456609DECFAD08;
+			settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); };
+		};
+		1E389226929EE931B46A4200 = {isa = PBXBuildFile;
+			fileRef = 5FD66DE0E636A31300F4B140;
+		};
+		24DA76B9AFFE621882BC3A69 = {isa = PBXBuildFile;
+			fileRef = 22150D91083184088BE092A4;
+		};
+		4C7DBE5A7E02BC29B63BD194 = {isa = PBXBuildFile;
+			fileRef = 45E569E9273C0BEEA820722C;
+		};
+		8208C36BE42ED5EEEB0EAEF7 = {isa = PBXBuildFile;
+			fileRef = 8BA6736A0DF7771C82E150B7;
+		};
+		86AADD996D97B15932259B26 = {isa = PBXBuildFile;
+			fileRef = 4B27435AC4B3C6348DA8C0ED;
+		};
+		A16F755BDE15C06F9EF35469 = {isa = PBXBuildFile;
+			fileRef = 66EB68DFF5AD86C09E8C0FE3;
+		};
+		AA9F467E4FB52B9EDDB3A2F0 = {isa = PBXBuildFile;
+			fileRef = D4EE54BE1ACC59981D30ED78;
+		};
+		1620B29687F63A0404A4F0C4 = {isa = PBXBuildFile;
+			fileRef = 66EB68DFF5AD86C09E8C0FE3;
+		};
+		A44A4105B3E7D424ADEAF03B = {isa = PBXBuildFile;
+			fileRef = D4EE54BE1ACC59981D30ED78;
+		};
+		AA516A3CB9778F271FA81A7A = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/App/MalayalamPanchangamCalendarApp.swift"; sourceTree = SOURCE_ROOT;
+		};
+		3B86E185A531805DED06452E = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Models/CoreTypes.swift"; sourceTree = SOURCE_ROOT;
+		};
+		A7223A8FEFF7341D4CE3C2AC = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Models/GeoLocation.swift"; sourceTree = SOURCE_ROOT;
+		};
+		9305E123FCA4E1F3F11B56B0 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Models/MalayalamCalendarTypes.swift"; sourceTree = SOURCE_ROOT;
+		};
+		A19C219E26B4A3F1641A033C = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Models/PanchangamDay.swift"; sourceTree = SOURCE_ROOT;
+		};
+		C36217A7FEFDC0220112232C = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Models/PanchangamDaySnapshot.swift"; sourceTree = SOURCE_ROOT;
+		};
+		8E2EB297E2866CCFC29CE569 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Models/ReminderModels.swift"; sourceTree = SOURCE_ROOT;
+		};
+		5D4683F835EB9F1B4A0E0A6F = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Models/ValidationModels.swift"; sourceTree = SOURCE_ROOT;
+		};
+		656140D97F2259C9FE7C3A8A = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Protocols/AstronomicalComputing.swift"; sourceTree = SOURCE_ROOT;
+		};
+		D2947D4BD3DE0C1035F23926 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Protocols/PanchangamCalculator.swift"; sourceTree = SOURCE_ROOT;
+		};
+		254F0D5C898DEAF2C1CB47CB = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Protocols/PanchangamValidator.swift"; sourceTree = SOURCE_ROOT;
+		};
+		04B7E0082FEE37CD499E9988 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Protocols/PlatformServices.swift"; sourceTree = SOURCE_ROOT;
+		};
+		D70D8782C7BB4530595A204C = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Protocols/ReminderScheduling.swift"; sourceTree = SOURCE_ROOT;
+		};
+		9F8EB42EF6C07B8CBA89EF47 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calculation/ApproximateAstronomyEngine.swift"; sourceTree = SOURCE_ROOT;
+		};
+		BFD4C3315EFEB1701DD0251D = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calculation/DefaultPanchangamCalculator.swift"; sourceTree = SOURCE_ROOT;
+		};
+		EB59F10BA0CA2DEBF12A8045 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calculation/MalayalamDateCalculator.swift"; sourceTree = SOURCE_ROOT;
+		};
+		894BC4A103854B6D8754F166 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calculation/RahuPeriodCalculator.swift"; sourceTree = SOURCE_ROOT;
+		};
+		A80842D8A098AF6212875FD4 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calculation/SwissEphemerisAdapter.swift"; sourceTree = SOURCE_ROOT;
+		};
+		D67E077299B8374FCFF0164D = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calculation/TithiCalculator.swift"; sourceTree = SOURCE_ROOT;
+		};
+		E7456707AD307C7EF2532E34 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calculation/YearGenerationService.swift"; sourceTree = SOURCE_ROOT;
+		};
+		7F23B751EF2007B43C55F546 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calendar/EventKitCalendarService.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FEFBAD29AAFB7DB7643AE45F = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calendar/MalayalamReminderEventGenerator.swift"; sourceTree = SOURCE_ROOT;
+		};
+		431A1BC737AB6F73BC8BEA6C = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Geocoding/AppleGeocodingService.swift"; sourceTree = SOURCE_ROOT;
+		};
+		7657D820EEF69B87B80D1A2E = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Notifications/UserNotificationService.swift"; sourceTree = SOURCE_ROOT;
+		};
+		32AD832D8D644429A5CE5068 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Persistence/AppPreferencesStore.swift"; sourceTree = SOURCE_ROOT;
+		};
+		D7D38E1A58A85DA91A630196 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Persistence/FilePanchangamCache.swift"; sourceTree = SOURCE_ROOT;
+		};
+		58E1FDE37E235201E713235D = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Persistence/FileReminderStore.swift"; sourceTree = SOURCE_ROOT;
+		};
+		25739D65716A3F63112507C1 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Persistence/WidgetSnapshotStore.swift"; sourceTree = SOURCE_ROOT;
+		};
+		38B943606A5DC6F0B933D470 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Validation/DefaultPanchangamValidator.swift"; sourceTree = SOURCE_ROOT;
+		};
+		99F3982C0E04426362F30029 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Validation/ReferenceValidationSource.swift"; sourceTree = SOURCE_ROOT;
+		};
+		0F005D345FBE9A28AD036C3E = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Validation/ValidationFixtureLoader.swift"; sourceTree = SOURCE_ROOT;
+		};
+		63750463B4F2E7144B8DC8BA = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Settings/SettingsView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		F1AAD6BE15E7EB82B8E69535 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/ViewModels/CalendarViewModel.swift"; sourceTree = SOURCE_ROOT;
+		};
+		BB4B6512ACA78B0B74B42438 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/ViewModels/LocationSearchViewModel.swift"; sourceTree = SOURCE_ROOT;
+		};
+		548BF8B9A1851188AB9E216F = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/ViewModels/ReminderViewModel.swift"; sourceTree = SOURCE_ROOT;
+		};
+		06EFEAF4B546DEB64534CDF6 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/ViewModels/ValidationReportViewModel.swift"; sourceTree = SOURCE_ROOT;
+		};
+		99C88164E67519C74496F301 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/ContentView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		E58017DCB5B0F980E9153025 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/DayDetailView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		61F5EFA98C8387E4ADF41C2E = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/LocationSelectionView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		9585A1A134CE7E95C0A5F70A = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/MonthCalendarView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		58106F7C4B088B94D3C39B4A = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/PanchangamDetailScreen.swift"; sourceTree = SOURCE_ROOT;
+		};
+		C562CF3A7E15C9750B418884 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/RemindersView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		5C0E4375090AAA8A6BAB9ED7 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/SidebarView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		16823C1D99AD4E32088F9B6F = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/ValidationReportView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		939971B2DD39C7B042B13DEA = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Support/DateFormatting.swift"; sourceTree = SOURCE_ROOT;
+		};
+		0CA6918E37B7A9854775E3A4 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Support/MathExtensions.swift"; sourceTree = SOURCE_ROOT;
+		};
+		297F59D5D1F7FB5B8770027A = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Support/MockData.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455667788 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Support/KeralaHolidays.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455667800 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/YearCalendarView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455667822 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/WeekCalendarView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455668000 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Models/GrahanilaTypes.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455668002 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calculation/PlanetaryCalculator.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455668004 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calculation/GrahanilaCalculationService.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455668006 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/ViewModels/GrahanilaViewModel.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455668008 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/GrahanilaChartView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455668010 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Models/NakshatraOccurrenceTypes.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455668012 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Calculation/NakshatraOccurrenceAnalyzer.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000001 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Models/FamilyTypes.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000003 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Domain/Protocols/FamilyStoring.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000005 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Family/FamilyStore.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000007 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Family/PersonalGrahanilaService.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000009 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Family/ShraddhamDateFinder.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000011 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Family/FamilyEventGenerator.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000013 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Family/HoroscopeExporter.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000015 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/ViewModels/FamilyViewModel.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000017 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/Family/FamilyView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000019 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/Family/PersonFormView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000021 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/Family/ManualGrahanilaEditorView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000023 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Presentation/Views/Family/HoroscopeExportView.swift"; sourceTree = SOURCE_ROOT;
+		};
+		FAFAMILY0000000000000025 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "Sources/MalayalamPanchangamCalendar/Infrastructure/Security/KeychainEncryptionManager.swift"; sourceTree = SOURCE_ROOT;
+		};
+		AABBCC001122334455667844 = {isa = PBXFileReference;
+			lastKnownFileType = folder.assetcatalog; path = "Sources/MalayalamPanchangamCalendar/Resources/Assets.xcassets"; sourceTree = SOURCE_ROOT;
+		};
+		2518A3C3E0C5E7B4A614BF94 = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "WidgetExtension/MalayalamPanchangamDayWidget/MalayalamPanchangamDayWidget.swift"; sourceTree = SOURCE_ROOT;
+		};
+		8AF059E838352B4ADE02058F = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = "WidgetExtension/MalayalamPanchangamDayWidget/PanchangamDaySnapshot.swift"; sourceTree = SOURCE_ROOT;
+		};
+		5D60513D229E741E4C177950 = {isa = PBXFileReference;
+			lastKnownFileType = text.plist.entitlements; path = "Config/App.entitlements"; sourceTree = SOURCE_ROOT;
+		};
+		B7290B0E4A6254F4530A99F9 = {isa = PBXFileReference;
+			lastKnownFileType = text.plist.entitlements; path = "Config/Widget.entitlements"; sourceTree = SOURCE_ROOT;
+		};
+		4A818E7F9A5AD0A804A7CF14 = {isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml; path = "WidgetExtension/MalayalamPanchangamDayWidget/Info.plist"; sourceTree = SOURCE_ROOT;
+		};
+		7A55FD5853B906B3C605E2DD = {isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = SOURCE_ROOT;
+		};
+		48BCFE29A0249DBCBE03BFD8 = {isa = PBXFileReference;
+			lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT;
+		};
+		5FD66DE0E636A31300F4B140 = {isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT;
+		};
+		22150D91083184088BE092A4 = {isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT;
+		};
+		45E569E9273C0BEEA820722C = {isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT;
+		};
+		8BA6736A0DF7771C82E150B7 = {isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework; name = SwiftData.framework; path = System/Library/Frameworks/SwiftData.framework; sourceTree = SDKROOT;
+		};
+		4B27435AC4B3C6348DA8C0ED = {isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT;
+		};
+		66EB68DFF5AD86C09E8C0FE3 = {isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT;
+		};
+		D4EE54BE1ACC59981D30ED78 = {isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT;
+		};
+		8BEFD367C4AB92E0F59B0B1F = {isa = PBXFileReference;
+			explicitFileType = wrapper.application; includeInIndex = 0; path = "Siveesh's Calendar.app"; sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F22E9F166F456609DECFAD08 = {isa = PBXFileReference;
+			explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MalayalamPanchangamDayWidget.appex; sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D685C104AFFBCF83C7CB0FB6 = {isa = PBXGroup;
+			children = (
+				AA516A3CB9778F271FA81A7A,
+				3B86E185A531805DED06452E,
+				A7223A8FEFF7341D4CE3C2AC,
+				9305E123FCA4E1F3F11B56B0,
+				A19C219E26B4A3F1641A033C,
+				C36217A7FEFDC0220112232C,
+				8E2EB297E2866CCFC29CE569,
+				5D4683F835EB9F1B4A0E0A6F,
+				656140D97F2259C9FE7C3A8A,
+				D2947D4BD3DE0C1035F23926,
+				254F0D5C898DEAF2C1CB47CB,
+				04B7E0082FEE37CD499E9988,
+				D70D8782C7BB4530595A204C,
+				9F8EB42EF6C07B8CBA89EF47,
+				BFD4C3315EFEB1701DD0251D,
+				EB59F10BA0CA2DEBF12A8045,
+				894BC4A103854B6D8754F166,
+				A80842D8A098AF6212875FD4,
+				D67E077299B8374FCFF0164D,
+				E7456707AD307C7EF2532E34,
+				7F23B751EF2007B43C55F546,
+				FEFBAD29AAFB7DB7643AE45F,
+				431A1BC737AB6F73BC8BEA6C,
+				7657D820EEF69B87B80D1A2E,
+				32AD832D8D644429A5CE5068,
+				D7D38E1A58A85DA91A630196,
+				58E1FDE37E235201E713235D,
+				25739D65716A3F63112507C1,
+				38B943606A5DC6F0B933D470,
+				99F3982C0E04426362F30029,
+				0F005D345FBE9A28AD036C3E,
+				63750463B4F2E7144B8DC8BA,
+				F1AAD6BE15E7EB82B8E69535,
+				BB4B6512ACA78B0B74B42438,
+				548BF8B9A1851188AB9E216F,
+				06EFEAF4B546DEB64534CDF6,
+				99C88164E67519C74496F301,
+				E58017DCB5B0F980E9153025,
+				61F5EFA98C8387E4ADF41C2E,
+				9585A1A134CE7E95C0A5F70A,
+				58106F7C4B088B94D3C39B4A,
+				C562CF3A7E15C9750B418884,
+				5C0E4375090AAA8A6BAB9ED7,
+				16823C1D99AD4E32088F9B6F,
+				939971B2DD39C7B042B13DEA,
+				0CA6918E37B7A9854775E3A4,
+				297F59D5D1F7FB5B8770027A,
+				AABBCC001122334455667788,
+				AABBCC001122334455667800,
+				AABBCC001122334455667822,
+				AABBCC001122334455667844,
+			);
+			name = AppSources;
+			sourceTree = "<group>";
+		};
+		6F230C62CFDF7E105F8BC4CC = {isa = PBXGroup;
+			children = (
+				2518A3C3E0C5E7B4A614BF94,
+				8AF059E838352B4ADE02058F,
+				4A818E7F9A5AD0A804A7CF14,
+			);
+			name = WidgetExtension;
+			sourceTree = "<group>";
+		};
+		6CC639B45892D4DB72603DD9 = {isa = PBXGroup;
+			children = (
+				5D60513D229E741E4C177950,
+				B7290B0E4A6254F4530A99F9,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		175C932161BEBF3B8BB1F58C = {isa = PBXGroup;
+			children = (
+				5FD66DE0E636A31300F4B140,
+				22150D91083184088BE092A4,
+				45E569E9273C0BEEA820722C,
+				8BA6736A0DF7771C82E150B7,
+				4B27435AC4B3C6348DA8C0ED,
+				66EB68DFF5AD86C09E8C0FE3,
+				D4EE54BE1ACC59981D30ED78,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF7A2D27A78D590BDEF15AF2 = {isa = PBXGroup;
+			children = (
+				8BEFD367C4AB92E0F59B0B1F,
+				F22E9F166F456609DECFAD08,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5928955287B8089ED2177128 = {isa = PBXGroup;
+			children = (
+				D685C104AFFBCF83C7CB0FB6,
+				6F230C62CFDF7E105F8BC4CC,
+				6CC639B45892D4DB72603DD9,
+				7A55FD5853B906B3C605E2DD,
+				48BCFE29A0249DBCBE03BFD8,
+				175C932161BEBF3B8BB1F58C,
+				BF7A2D27A78D590BDEF15AF2,
+			);
+			sourceTree = "<group>";
+		};
+		633C6E932BCA47CF314C046A = {isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03D6F1C3BA8CD70E2EFE29BA,
+				FDAE348BA76A4B2D582273C7,
+				9F648E1A70BAF3FFB6ECA757,
+				C8347C8D6290DFF55E3BF252,
+				2E5D3C69955BFD6D0429A893,
+				A26CC568112DE49BF98EC591,
+				F9BEBBA322A048CCCCB3048F,
+				561CAC2669DA110E93C80863,
+				3DB1CF711A0A76177AD28E97,
+				C5ACD4089A1B1E2A843844BE,
+				BE1AF7427C0039D93EE7ED99,
+				12D8174A532CD3E95654D81D,
+				CF38926D87D0B1BB69582950,
+				8211DA7BE3E05F64DF4C2A80,
+				E851722A768FC3AAF342F365,
+				50B3B6360C454B36E5EA9F8E,
+				FBA38778871517D066B07D27,
+				ABE08EA434A2822EE7E76B65,
+				44DB432476AA5841A06B6EF8,
+				AE3FBFBECF0600FE7FFC5124,
+				0B56BA35989CC4BD2B1617B8,
+				CD3E540CE32752BBE329D0C4,
+				F94AF1014E4D434683ACDDC1,
+				CD472C7F4281497D9BBAAF0F,
+				304FB4A393781C602210C685,
+				1FD1B3FFCBA9897831C432F3,
+				AC328EB05E55461D25055357,
+				F41674A78F4AEA59D07C7690,
+				3FE7ADC8CD5D3883EC96F135,
+				2221AE12823E589F222F27E2,
+				5B94F23EEF6DFEC55DE6D667,
+				8FD4F47BCE123D6106DCE116,
+				17BF4755975AD3688B0B2997,
+				0BE1232DC1AF5EBA349B3DBB,
+				F3551D489B832B75581D97D0,
+				C5B11CF9B4638C5016C2A230,
+				7A39F41BD99295B1B1C05A20,
+				41576ED45A65419D5CF31F30,
+				472E5FB1A4D1FBD0C6A5368C,
+				2E4844AC503E96A81A4D03B3,
+				48D798263B05C0EE4675F740,
+				562A726F7475B38AC4C32818,
+				62D86478A12EE56A5CE82078,
+				2D6857F0D686CA4F6286404C,
+				D04B6ACBBCA8F5E5AE15440E,
+				2BB9A32AF13557804008210C,
+				38EF5805A4141286F8C362DE,
+				AABBCC001122334455667799,
+				AABBCC001122334455667811,
+				AABBCC001122334455667833,
+				AABBCC001122334455668001,
+				AABBCC001122334455668003,
+				AABBCC001122334455668005,
+				AABBCC001122334455668007,
+				AABBCC001122334455668009,
+				AABBCC001122334455668011,
+				AABBCC001122334455668013,
+				FAFAMILY0000000000000002,
+				FAFAMILY0000000000000004,
+				FAFAMILY0000000000000006,
+				FAFAMILY0000000000000008,
+				FAFAMILY0000000000000010,
+				FAFAMILY0000000000000012,
+				FAFAMILY0000000000000014,
+				FAFAMILY0000000000000016,
+				FAFAMILY0000000000000018,
+				FAFAMILY0000000000000020,
+				FAFAMILY0000000000000022,
+				FAFAMILY0000000000000024,
+				FAFAMILY0000000000000026,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AABBCC001122334455667866 = {isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABBCC001122334455667855,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20D48A0EBBDA331844FA315E = {isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A28D54D883208F7752E27BAA,
+				AF321348A2176BA6B892C9AF,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F4B264A4EA4661AD798CC59 = {isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E389226929EE931B46A4200,
+				24DA76B9AFFE621882BC3A69,
+				4C7DBE5A7E02BC29B63BD194,
+				8208C36BE42ED5EEEB0EAEF7,
+				86AADD996D97B15932259B26,
+				A16F755BDE15C06F9EF35469,
+				AA9F467E4FB52B9EDDB3A2F0,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47FFFC5D6A942AE5B172BF0C = {isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1620B29687F63A0404A4F0C4,
+				A44A4105B3E7D424ADEAF03B,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F4C4B608A6B58AAEE725BC2 = {isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0507AFE199147EFE6B22CEC5,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE9D6E5704798B8CCA6A424D = {isa = PBXContainerItemProxy;
+			containerPortal = 46F86FAA6BBF9AC94A7E4595;
+			proxyType = 1;
+			remoteGlobalIDString = DBB52CECAA63396FA5ACBA59;
+			remoteInfo = MalayalamPanchangamDayWidget;
+		};
+		8F675580163AA08FD3ED963B = {isa = PBXTargetDependency;
+			target = DBB52CECAA63396FA5ACBA59;
+			targetProxy = BE9D6E5704798B8CCA6A424D;
+		};
+		E92819776D1D900150F17949 = {isa = PBXNativeTarget;
+			buildConfigurationList = A5565127C23E2209755B64B6;
+			buildPhases = (
+				AABBCC001122334455667866,
+				633C6E932BCA47CF314C046A,
+				2F4B264A4EA4661AD798CC59,
+				6F4C4B608A6B58AAEE725BC2,
+			);
+			buildRules = ( );
+			dependencies = (
+				8F675580163AA08FD3ED963B,
+			);
+			name = "Siveesh's Calendar";
+			productName = "Siveesh's Calendar";
+			productReference = 8BEFD367C4AB92E0F59B0B1F;
+			productType = "com.apple.product-type.application";
+		};
+		DBB52CECAA63396FA5ACBA59 = {isa = PBXNativeTarget;
+			buildConfigurationList = D608DFCE59521A4F524F13C9;
+			buildPhases = (
+				20D48A0EBBDA331844FA315E,
+				47FFFC5D6A942AE5B172BF0C,
+			);
+			buildRules = ( );
+			dependencies = ( );
+			name = MalayalamPanchangamDayWidget;
+			productName = MalayalamPanchangamDayWidget;
+			productReference = F22E9F166F456609DECFAD08;
+			productType = "com.apple.product-type.app-extension";
+		};
+		46F86FAA6BBF9AC94A7E4595 = {isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					E92819776D1D900150F17949 = { CreatedOnToolsVersion = 16.0; };
+					DBB52CECAA63396FA5ACBA59 = { CreatedOnToolsVersion = 16.0; };
+				};
+			};
+			buildConfigurationList = FE422E61AE992D05BC2E14C2;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base, );
+			mainGroup = 5928955287B8089ED2177128;
+			productRefGroup = BF7A2D27A78D590BDEF15AF2;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E92819776D1D900150F17949,
+				DBB52CECAA63396FA5ACBA59,
+			);
+		};
+		8075F60415069C2BCB23FFD1 = {isa = XCBuildConfiguration;
+			name = Debug;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+				ENABLE_TESTABILITY = YES;
+				SWIFT_OPTIMIZATION_LEVEL = -Onone;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+			};
+		};
+		63A23CADC2DB422E378CB61E = {isa = XCBuildConfiguration;
+			name = Release;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+				ENABLE_TESTABILITY = NO;
+				SWIFT_OPTIMIZATION_LEVEL = -O;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+		};
+		DCCBDE3F94244BDA014BC8B5 = {isa = XCBuildConfiguration;
+			name = Debug;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Config/App.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Siveesh's Calendar";
+				INFOPLIST_KEY_LSApplicationCategoryType = public.app-category.reference;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Siveesh's Calendar adds selected reminders to Apple Calendar.";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Siveesh's Calendar uses location to calculate local Panchangam times.";
+				INFOPLIST_KEY_NSUserNotificationUsageDescription = "Siveesh's Calendar sends reminder and Panchangam alerts.";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.malayalampanchangam.calendar;
+				PRODUCT_NAME = "Siveesh's Calendar";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+		};
+		25A20655A6511EB9FC9D5E23 = {isa = XCBuildConfiguration;
+			name = Release;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Config/App.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Siveesh's Calendar";
+				INFOPLIST_KEY_LSApplicationCategoryType = public.app-category.reference;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Siveesh's Calendar adds selected reminders to Apple Calendar.";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Siveesh's Calendar uses location to calculate local Panchangam times.";
+				INFOPLIST_KEY_NSUserNotificationUsageDescription = "Siveesh's Calendar sends reminder and Panchangam alerts.";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.malayalampanchangam.calendar;
+				PRODUCT_NAME = "Siveesh's Calendar";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+		};
+		06CAC422A0988BFF7C0C48EF = {isa = XCBuildConfiguration;
+			name = Debug;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/Widget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = WidgetExtension/MalayalamPanchangamDayWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.malayalampanchangam.calendar.daywidget;
+				PRODUCT_NAME = MalayalamPanchangamDayWidget;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_VERSION = 6.0;
+				WRAPPER_EXTENSION = appex;
+			};
+		};
+		17D9ED182539F343CBD774DE = {isa = XCBuildConfiguration;
+			name = Release;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/Widget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = WidgetExtension/MalayalamPanchangamDayWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.malayalampanchangam.calendar.daywidget;
+				PRODUCT_NAME = MalayalamPanchangamDayWidget;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_VERSION = 6.0;
+				WRAPPER_EXTENSION = appex;
+			};
+		};
+		FE422E61AE992D05BC2E14C2 = {isa = XCConfigurationList;
+			buildConfigurations = (
+				8075F60415069C2BCB23FFD1,
+				63A23CADC2DB422E378CB61E,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5565127C23E2209755B64B6 = {isa = XCConfigurationList;
+			buildConfigurations = (
+				DCCBDE3F94244BDA014BC8B5,
+				25A20655A6511EB9FC9D5E23,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D608DFCE59521A4F524F13C9 = {isa = XCConfigurationList;
+			buildConfigurations = (
+				06CAC422A0988BFF7C0C48EF,
+				17D9ED182539F343CBD774DE,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+	};
+	rootObject = 46F86FAA6BBF9AC94A7E4595;
+}

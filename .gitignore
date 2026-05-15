@@ -1,0 +1,31 @@
+# Xcode build artefacts
+.build/
+.swiftpm/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Codex agent working directory
+.codex/
+
+# Distributable (generated — not source)
+*.dmg
+*.pkg
+
+# Exported personal PDFs (private user data)
+*.pdf
+
+# Build scripts output
+script/*.log
