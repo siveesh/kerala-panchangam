@@ -32,17 +32,32 @@ struct MalayalamPanchangamDayProvider: TimelineProvider {
     // MARK: - Data loading
 
     private func loadSnapshot() -> PanchangamDaySnapshot {
-        guard
-            let base = FileManager.default.containerURL(
-                forSecurityApplicationGroupIdentifier: "group.com.malayalampanchangam.calendar"),
-            let data = try? Data(contentsOf: base
-                .appending(path: "MalayalamPanchangamCalendar", directoryHint: .isDirectory)
-                .appending(path: "WidgetDaySnapshot.json")),
-            let snapshot = try? JSONDecoder().decode(PanchangamDaySnapshot.self, from: data)
-        else {
-            return .placeholder
+        // Build candidate URLs: App Group container first, then direct fallback path
+        var candidates: [URL] = []
+
+        if let base = FileManager.default.containerURL(
+                forSecurityApplicationGroupIdentifier: "group.com.malayalampanchangam.calendar") {
+            candidates.append(
+                base
+                    .appending(path: "MalayalamPanchangamCalendar", directoryHint: .isDirectory)
+                    .appending(path: "WidgetDaySnapshot.json")
+            )
         }
-        return snapshot
+
+        // Direct fallback — works when App Group sandbox read is blocked on dev-signed builds
+        let home = FileManager.default.homeDirectoryForCurrentUser
+        candidates.append(
+            home
+                .appendingPathComponent("Library/Group Containers/group.com.malayalampanchangam.calendar/MalayalamPanchangamCalendar/WidgetDaySnapshot.json")
+        )
+
+        for url in candidates {
+            if let data = try? Data(contentsOf: url),
+               let snapshot = try? JSONDecoder().decode(PanchangamDaySnapshot.self, from: data) {
+                return snapshot
+            }
+        }
+        return .placeholder
     }
 }
 
