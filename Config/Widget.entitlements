@@ -3,10 +3,16 @@
 <plist version="1.0">
 <dict>
     <key>com.apple.security.app-sandbox</key>
-    <false/>
+    <true/>
     <key>com.apple.security.application-groups</key>
     <array>
         <string>group.com.malayalampanchangam.calendar</string>
+    </array>
+    <!-- Temporary exception: grants read access to the group container path
+         on dev-signed builds where App Group provisioning is unavailable. -->
+    <key>com.apple.security.temporary-exception.files.home-relative-path.read-only</key>
+    <array>
+        <string>/Library/Group Containers/group.com.malayalampanchangam.calendar/</string>
     </array>
 </dict>
 </plist>
