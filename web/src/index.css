@@ -38,19 +38,24 @@
    --cal-col = effective column width (set by JS via CSS custom property)
    ─────────────────────────────────────────────────────────────────────────── */
 .cal-cell {
-  /* Prefer ~1.35× the column width; clamp between 4rem and 9rem */
-  height: clamp(4rem, var(--cal-col, 13vw) * 1.35, 9rem);
+  /* Prefer 1.4× column width; clamp so phone ≥ 5rem, tablet ≤ 9rem */
+  height: clamp(5rem, calc(var(--cal-col, 13vw) * 1.4), 9rem);
+}
+.cal-day-circle {
+  /* Date-number circle scales with column width */
+  width:  clamp(1.1rem, calc(var(--cal-col, 13vw) * 0.32), 1.75rem);
+  height: clamp(1.1rem, calc(var(--cal-col, 13vw) * 0.32), 1.75rem);
 }
 .cal-nak {
-  /* Prefer ~11% of column width; clamp to readable range */
+  /* English nakshatra — prefer 11% of column width */
   font-size: clamp(8px, calc(var(--cal-col, 13vw) * 0.11), 14px);
 }
 .cal-nak-ml {
-  /* Malayalam glyphs are wider; give them a touch more room */
-  font-size: clamp(9px, calc(var(--cal-col, 13vw) * 0.125), 15px);
+  /* Malayalam glyphs — slightly larger so they stay legible */
+  font-size: clamp(10px, calc(var(--cal-col, 13vw) * 0.13), 16px);
 }
 .cal-day-num {
-  font-size: clamp(10px, calc(var(--cal-col, 13vw) * 0.13), 16px);
+  font-size: clamp(9px, calc(var(--cal-col, 13vw) * 0.13), 16px);
 }
 .cal-ml-day {
   font-size: clamp(8px, calc(var(--cal-col, 13vw) * 0.10), 13px);

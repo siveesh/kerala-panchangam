@@ -156,14 +156,31 @@ function ProfileRow({ profile, days, onEdit }: { profile: PersonProfile; days: P
   const name = profile.nickname.trim() !== '' ? profile.nickname : profile.fullName
   const deceased = !!profile.deathDetails
 
+  // Events can only be generated when Calculate has been run (nakshatra + malayalam month both set)
+  const canExportBirthday = profile.birthDetails?.birthNakshatra !== undefined
+    && profile.birthDetails?.birthMalayalamMonth !== undefined
+  const canExportShraddham = !!profile.deathDetails
+    && (profile.deathDetails.deathNakshatra !== undefined || profile.deathDetails.deathTithi !== undefined)
+  const canExport = canExportBirthday || canExportShraddham
+
   function handleExportPerson(e: React.MouseEvent) {
-    e.stopPropagation()   // don't open the editor
-    if (days.length === 0) { alert('Load a year first to generate events.'); return }
+    e.stopPropagation()
+    if (days.length === 0) {
+      alert('Calendar data not loaded yet. Go to the Calendar tab and let it finish loading.')
+      return
+    }
     const events = [
       ...birthdayEvents(profile, days),
       ...shraddhamEvents(profile, days),
     ]
-    if (events.length === 0) { alert('No events found. Add birth/death details first.'); return }
+    if (events.length === 0) {
+      alert(
+        `No events generated for ${name}.\n\n` +
+        `Make sure you tapped "Calculate" in the profile editor so the ` +
+        `birth/death nakshatra and Malayalam month are set.`
+      )
+      return
+    }
     downloadIcsForPerson(events, name)
   }
 
@@ -186,8 +203,8 @@ function ProfileRow({ profile, days, onEdit }: { profile: PersonProfile; days: P
         </div>
       </button>
 
-      {/* Per-person calendar export — only when there's something to export */}
-      {(profile.birthDetails?.birthNakshatra !== undefined || profile.deathDetails?.deathNakshatra !== undefined) && (
+      {/* Per-person calendar export — only shown once Calculate has been run */}
+      {canExport && (
         <button
           onClick={handleExportPerson}
           title={`Export ${name}'s events (.ics)`}

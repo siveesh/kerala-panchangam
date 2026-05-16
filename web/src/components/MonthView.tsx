@@ -99,7 +99,7 @@ export function MonthView({ days, location, year, month, birthdayNakshatras, shr
               className="bg-white cal-cell p-1 text-left flex flex-col active:bg-kerala-50 transition-colors relative overflow-hidden"
             >
               {/* Gregorian date number */}
-              <span className={`cal-day-num font-semibold w-5 h-5 flex items-center justify-center rounded-full flex-shrink-0
+              <span className={`cal-day-num cal-day-circle font-semibold flex items-center justify-center rounded-full flex-shrink-0
                 ${isToday ? 'bg-kerala-700 text-white' : 'text-stone-700'}`}>
                 {domDay}
               </span>
