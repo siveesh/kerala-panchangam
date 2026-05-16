@@ -67,11 +67,14 @@ struct ShraddhamDateFinder: Sendable {
         let monthInstances = FamilyEventGenerator.consecutiveMonthInstances(of: month, in: days)
 
         return monthInstances.flatMap { instanceDays -> [ShraddhamDate] in
+            // Community standard (confirmed by astrologer): Śrāddham observes the
+            // FIRST occurrence of the death nakshatra in the month. This is the
+            // opposite of auspicious events (birthdays) which use the second occurrence.
             let recommended = analyzer.analyze(
                 nakshatra: nakshatra,
                 month: month,
                 in: instanceDays,
-                policy: .alwaysFirst,          // no duplicate-policy ambiguity for Śrāddham
+                policy: .alwaysFirst,
                 threshold: .default
             ).recommendedDays
 

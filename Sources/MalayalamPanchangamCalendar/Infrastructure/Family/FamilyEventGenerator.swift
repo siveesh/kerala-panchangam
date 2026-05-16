@@ -130,12 +130,18 @@ struct FamilyEventGenerator: FamilyEventGenerating {
         // regardless of Gregorian year boundary.
         let monthInstances = Self.consecutiveMonthInstances(of: month, in: days)
 
+        // Community standard (confirmed by astrologer): for all auspicious events
+        // (birthdays, star anniversaries) the SECOND occurrence of the nakshatra is
+        // observed when the month contains two runs of that nakshatra. The first
+        // occurrence is skipped. When only one occurrence exists the single run is
+        // used automatically regardless of policy.
+        // Śrāddham (death anniversary) uses the FIRST occurrence — see ShraddhamDateFinder.
         return monthInstances.flatMap { instanceDays in
             analyzer.analyze(
                 nakshatra: nakshatra,
                 month: month,
                 in: instanceDays,
-                policy: policy,
+                policy: .alwaysSecond,
                 threshold: threshold
             ).recommendedDays
         }
