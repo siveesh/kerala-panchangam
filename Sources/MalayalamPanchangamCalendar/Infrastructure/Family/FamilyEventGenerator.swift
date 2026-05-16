@@ -136,6 +136,10 @@ struct FamilyEventGenerator: FamilyEventGenerating {
         // occurrence is skipped. When only one occurrence exists the single run is
         // used automatically regardless of policy.
         // Śrāddham (death anniversary) uses the FIRST occurrence — see ShraddhamDateFinder.
+        //
+        // A nakshatra can be the sunrise-nakshatra on two consecutive days when it
+        // spans overnight. We take only the FIRST day of the recommended occurrence
+        // so exactly one birthday event is generated per annual occurrence.
         return monthInstances.flatMap { instanceDays in
             analyzer.analyze(
                 nakshatra: nakshatra,
@@ -143,7 +147,7 @@ struct FamilyEventGenerator: FamilyEventGenerating {
                 in: instanceDays,
                 policy: .alwaysSecond,
                 threshold: threshold
-            ).recommendedDays
+            ).recommendedDays.prefix(1)
         }
     }
 

@@ -70,6 +70,10 @@ struct ShraddhamDateFinder: Sendable {
             // Community standard (confirmed by astrologer): Śrāddham observes the
             // FIRST occurrence of the death nakshatra in the month. This is the
             // opposite of auspicious events (birthdays) which use the second occurrence.
+            //
+            // A nakshatra can be the sunrise-nakshatra on two consecutive days when it
+            // spans overnight. We take only the FIRST day of the recommended occurrence —
+            // observing on one day only, never creating two Śrāddham events in a row.
             let recommended = analyzer.analyze(
                 nakshatra: nakshatra,
                 month: month,
@@ -78,17 +82,16 @@ struct ShraddhamDateFinder: Sendable {
                 threshold: .default
             ).recommendedDays
 
-            return recommended.map { day in
-                ShraddhamDate(
-                    personID: profile.id,
-                    personName: profile.displayName,
-                    gregorianDate: day.date,
-                    tithi: day.tithi,
-                    paksha: Paksha.from(day.tithi),
-                    malayalamDateLabel: "\(day.malayalamMonth.englishName) \(day.malayalamDay) · \(day.kollavarshamYear)",
-                    selectionRuleDescription: "Nakshatra: \(nakshatra.englishName) in \(month.englishName)"
-                )
-            }
+            guard let day = recommended.first else { return [] }
+            return [ShraddhamDate(
+                personID: profile.id,
+                personName: profile.displayName,
+                gregorianDate: day.date,
+                tithi: day.tithi,
+                paksha: Paksha.from(day.tithi),
+                malayalamDateLabel: "\(day.malayalamMonth.englishName) \(day.malayalamDay) · \(day.kollavarshamYear)",
+                selectionRuleDescription: "Nakshatra: \(nakshatra.englishName) in \(month.englishName)"
+            )]
         }
     }
 
