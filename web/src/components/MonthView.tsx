@@ -2,7 +2,7 @@
 // MonthView — calendar grid for a month
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useLayoutEffect } from 'react'
 import type { PanchangamDay } from '../models/PanchangamDay'
 import type { GeoLocation } from '../models/CoreTypes'
 import { NAKSHATRAS, TITHIS } from '../models/MalayalamCalendar'
@@ -22,6 +22,20 @@ interface Props {
 
 export function MonthView({ days, location, year, month, birthdayNakshatras, shraddhamNakshatras, nakshatraInMalayalam = false }: Props) {
   const [selectedDay, setSelectedDay] = useState<PanchangamDay | null>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  // Keep --cal-col in sync with actual column width so responsive CSS can use it
+  useLayoutEffect(() => {
+    function update() {
+      if (!gridRef.current) return
+      const colWidth = gridRef.current.offsetWidth / 7
+      gridRef.current.style.setProperty('--cal-col', `${colWidth}px`)
+    }
+    update()
+    const ro = new ResizeObserver(update)
+    if (gridRef.current) ro.observe(gridRef.current)
+    return () => ro.disconnect()
+  }, [])
 
   // Filter days for this Gregorian month using local time
   const monthDays = useMemo(() => {
@@ -67,10 +81,10 @@ export function MonthView({ days, location, year, month, birthdayNakshatras, shr
         ))}
       </div>
 
-      {/* Calendar grid */}
-      <div className="grid grid-cols-7 gap-px bg-stone-200 rounded-lg overflow-hidden">
+      {/* Calendar grid — ref so ResizeObserver can set --cal-col */}
+      <div ref={gridRef} className="grid grid-cols-7 gap-px bg-stone-200 rounded-lg overflow-hidden">
         {cells.map((day, idx) => {
-          if (!day) return <div key={`e-${idx}`} className="bg-white h-[4.5rem] sm:h-24" />
+          if (!day) return <div key={`e-${idx}`} className="bg-white cal-cell" />
 
           const local = new Date(day.date.toLocaleString('en-US', { timeZone: location.timeZoneId }))
           const domDay = local.getDate()
@@ -82,24 +96,23 @@ export function MonthView({ days, location, year, month, birthdayNakshatras, shr
             <button
               key={day.date.getTime()}
               onClick={() => setSelectedDay(day)}
-              className="bg-white h-[4.5rem] sm:h-24 p-1 text-left flex flex-col active:bg-kerala-50 transition-colors relative overflow-hidden"
+              className="bg-white cal-cell p-1 text-left flex flex-col active:bg-kerala-50 transition-colors relative overflow-hidden"
             >
               {/* Gregorian date number */}
-              <span className={`text-xs font-semibold w-5 h-5 flex items-center justify-center rounded-full flex-shrink-0
+              <span className={`cal-day-num font-semibold w-5 h-5 flex items-center justify-center rounded-full flex-shrink-0
                 ${isToday ? 'bg-kerala-700 text-white' : 'text-stone-700'}`}>
                 {domDay}
               </span>
 
               {/* Malayalam day number */}
-              <span className="text-[9px] text-kerala-700 font-medium leading-tight mt-0.5 flex-shrink-0">
+              <span className="cal-ml-day text-kerala-700 font-medium leading-tight mt-0.5 flex-shrink-0">
                 {day.malayalamDay}
               </span>
 
               {/* Nakshatra name — full, truncated by CSS overflow */}
               <span
-                className="leading-tight mt-0.5 w-full overflow-hidden"
+                className={`leading-tight mt-0.5 w-full overflow-hidden ${nakshatraInMalayalam ? 'cal-nak-ml' : 'cal-nak'}`}
                 style={{
-                  fontSize: nakshatraInMalayalam ? '10px' : '8px',
                   color: (isBirthday || isShraddham) ? '#166534' : '#78716c',
                   fontWeight: (isBirthday || isShraddham) ? 600 : 400,
                   // Two-line clamp so long English names wrap rather than disappear

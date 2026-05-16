@@ -8,7 +8,7 @@ import type { PanchangamDay } from '../models/PanchangamDay'
 import { NAKSHATRAS, MALAYALAM_MONTHS, TITHIS } from '../models/MalayalamCalendar'
 import { birthdayEvents, shraddhamEvents } from '../family/EventGenerator'
 import { shraddhamDates } from '../family/ShraddhamFinder'
-import { downloadIcs } from '../export/IcsExporter'
+import { downloadIcs, downloadIcsForPerson } from '../export/IcsExporter'
 import { ProfileEditor } from './ProfileEditor'
 
 interface Props {
@@ -141,7 +141,7 @@ export function FamilyTab({ profiles, days, onSave, onDelete, onImport, onExport
       ) : (
         <div className="divide-y divide-stone-100">
           {activeProfiles.map(p => (
-            <ProfileRow key={p.id} profile={p} onEdit={() => setEditingProfile({ ...p })} />
+            <ProfileRow key={p.id} profile={p} days={days} onEdit={() => setEditingProfile({ ...p })} />
           ))}
         </div>
       )}
@@ -149,32 +149,64 @@ export function FamilyTab({ profiles, days, onSave, onDelete, onImport, onExport
   )
 }
 
-function ProfileRow({ profile, onEdit }: { profile: PersonProfile; onEdit: () => void }) {
+function ProfileRow({ profile, days, onEdit }: { profile: PersonProfile; days: PanchangamDay[]; onEdit: () => void }) {
   const nak = profile.birthDetails?.birthNakshatra !== undefined
     ? NAKSHATRAS[profile.birthDetails.birthNakshatra].english
     : null
   const name = profile.nickname.trim() !== '' ? profile.nickname : profile.fullName
   const deceased = !!profile.deathDetails
 
+  function handleExportPerson(e: React.MouseEvent) {
+    e.stopPropagation()   // don't open the editor
+    if (days.length === 0) { alert('Load a year first to generate events.'); return }
+    const events = [
+      ...birthdayEvents(profile, days),
+      ...shraddhamEvents(profile, days),
+    ]
+    if (events.length === 0) { alert('No events found. Add birth/death details first.'); return }
+    downloadIcsForPerson(events, name)
+  }
+
   return (
-    <button onClick={onEdit} className="w-full flex items-center gap-3 px-4 py-3 active:bg-stone-50 text-left">
-      <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${deceased ? 'bg-stone-100' : 'bg-kerala-100'}`}>
-        <svg viewBox="0 0 24 24" className={`w-5 h-5 ${deceased ? 'text-stone-400' : 'text-kerala-700'}`} fill="currentColor">
-          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
-        </svg>
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="font-medium text-stone-800 truncate">{name}</div>
-        <div className="text-xs text-stone-400 flex gap-2 mt-0.5">
-          {profile.relationshipTag && <span>{profile.relationshipTag}</span>}
-          {nak && <span>★ {nak}</span>}
-          {deceased && <span>🍃 Deceased</span>}
+    <div className="flex items-center gap-1 px-4 py-3">
+      {/* Tappable main area — opens editor */}
+      <button onClick={onEdit} className="flex items-center gap-3 flex-1 min-w-0 text-left active:opacity-70">
+        <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${deceased ? 'bg-stone-100' : 'bg-kerala-100'}`}>
+          <svg viewBox="0 0 24 24" className={`w-5 h-5 ${deceased ? 'text-stone-400' : 'text-kerala-700'}`} fill="currentColor">
+            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
+          </svg>
         </div>
-      </div>
-      <svg viewBox="0 0 24 24" className="w-4 h-4 text-stone-300 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
+        <div className="flex-1 min-w-0">
+          <div className="font-medium text-stone-800 truncate">{name}</div>
+          <div className="text-xs text-stone-400 flex gap-2 mt-0.5">
+            {profile.relationshipTag && <span>{profile.relationshipTag}</span>}
+            {nak && <span>★ {nak}</span>}
+            {deceased && <span>🍃 Deceased</span>}
+          </div>
+        </div>
+      </button>
+
+      {/* Per-person calendar export — only when there's something to export */}
+      {(profile.birthDetails?.birthNakshatra !== undefined || profile.deathDetails?.deathNakshatra !== undefined) && (
+        <button
+          onClick={handleExportPerson}
+          title={`Export ${name}'s events (.ics)`}
+          className="w-8 h-8 flex items-center justify-center rounded-full text-kerala-600 active:bg-kerala-50 flex-shrink-0"
+        >
+          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2}>
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path strokeLinecap="round" d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" />
+          </svg>
+        </button>
+      )}
+
+      {/* Edit chevron */}
+      <button onClick={onEdit} className="w-7 h-8 flex items-center justify-center flex-shrink-0">
+        <svg viewBox="0 0 24 24" className="w-4 h-4 text-stone-300" fill="none" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
   )
 }
 

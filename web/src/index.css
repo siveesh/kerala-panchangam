@@ -30,3 +30,28 @@
     scrollbar-width: none;
   }
 }
+
+/* ── Calendar cell responsive sizing ─────────────────────────────────────────
+   Cells fill 1/7 of the container width automatically (CSS grid).
+   Height = clamp(min, preferred, max) so small phones aren't too short
+   and large tablets aren't too small.
+   --cal-col = effective column width (set by JS via CSS custom property)
+   ─────────────────────────────────────────────────────────────────────────── */
+.cal-cell {
+  /* Prefer ~1.35× the column width; clamp between 4rem and 9rem */
+  height: clamp(4rem, var(--cal-col, 13vw) * 1.35, 9rem);
+}
+.cal-nak {
+  /* Prefer ~11% of column width; clamp to readable range */
+  font-size: clamp(8px, calc(var(--cal-col, 13vw) * 0.11), 14px);
+}
+.cal-nak-ml {
+  /* Malayalam glyphs are wider; give them a touch more room */
+  font-size: clamp(9px, calc(var(--cal-col, 13vw) * 0.125), 15px);
+}
+.cal-day-num {
+  font-size: clamp(10px, calc(var(--cal-col, 13vw) * 0.13), 16px);
+}
+.cal-ml-day {
+  font-size: clamp(8px, calc(var(--cal-col, 13vw) * 0.10), 13px);
+}

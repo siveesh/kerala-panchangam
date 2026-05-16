@@ -69,3 +69,24 @@ export function downloadIcs(events: FamilyCalendarEvent[], filename = 'panchanga
   a.click()
   URL.revokeObjectURL(url)
 }
+
+/**
+ * Trigger a download for a single person's events, named after them.
+ * Sanitises the name to be a safe filename.
+ */
+export function downloadIcsForPerson(events: FamilyCalendarEvent[], personName: string): void {
+  const safeName = personName
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '') || 'person'
+  const calName = `${personName} — Malayalam Panchangam`
+  const ics = generateIcs(events, calName)
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `panchangam-${safeName}.ics`
+  a.click()
+  URL.revokeObjectURL(url)
+}

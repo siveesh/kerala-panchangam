@@ -73,8 +73,8 @@ export default function App() {
         )}
       </div>
 
-      {/* Bottom tab bar */}
-      <nav className="flex border-t border-stone-200 bg-white safe-bottom">
+      {/* Bottom tab bar — safe-bottom pads below the buttons for the home indicator */}
+      <nav className="flex border-t border-stone-200 bg-white" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <TabItem icon={<CalIcon />} label="Calendar" active={tab === 'calendar'} onClick={() => setTab('calendar')} />
         <TabItem icon={<FamilyIcon />} label="Family"   active={tab === 'family'}   onClick={() => setTab('family')} />
         <TabItem icon={<GearIcon />}  label="Settings"  active={tab === 'settings'} onClick={() => setTab('settings')} />
@@ -87,7 +87,8 @@ function TabItem({ icon, label, active, onClick }: {
   icon: React.ReactNode; label: string; active: boolean; onClick: () => void
 }) {
   return (
-    <button onClick={onClick} className={`flex-1 flex flex-col items-center justify-center py-2 gap-0.5 transition-colors
+    // min-h-[3.25rem] keeps buttons at a consistent height regardless of safe-area size
+    <button onClick={onClick} className={`flex-1 min-h-[3.25rem] flex flex-col items-center justify-center py-2 gap-0.5 transition-colors
       ${active ? 'text-kerala-700' : 'text-stone-400'}`}>
       <span className="w-6 h-6">{icon}</span>
       <span className="text-[10px] font-medium">{label}</span>
