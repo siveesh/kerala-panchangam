@@ -66,7 +66,10 @@ export async function calculateYear(year: number, location: GeoLocation, mode: C
   // Extend 45 days into the next year so late Malayalam months (Dhanu: Dec 17–Jan 13,
   // Makaram: Jan 14–Feb 11) are fully covered for star-birthday and Śrāddham generation.
   // The calendar view already filters by month/year so extra days are invisible in the grid.
-  const numDays = (isLeap ? 366 : 365) + 45
+  // Extend 6 months (183 days) past Dec 31 so all Malayalam months including
+  // Dhanu (Dec 17–Jan 13) and Makaram (Jan 14–Feb 11) are fully covered for
+  // star-birthday and Śrāddham event generation.
+  const numDays = (isLeap ? 366 : 365) + 183
 
   for (let d = 0; d < numDays; d++) {
     // Build the UTC date for noon on day d (avoids DST/TZ edge cases)

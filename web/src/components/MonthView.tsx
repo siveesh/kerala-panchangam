@@ -5,7 +5,7 @@
 import { useState, useMemo, useRef, useLayoutEffect } from 'react'
 import type { PanchangamDay } from '../models/PanchangamDay'
 import type { GeoLocation } from '../models/CoreTypes'
-import { NAKSHATRAS, TITHIS } from '../models/MalayalamCalendar'
+import { NAKSHATRAS, TITHIS, MALAYALAM_MONTHS } from '../models/MalayalamCalendar'
 import { DayDetailSheet } from './DayDetailSheet'
 
 const WEEKDAY_LABELS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
@@ -108,6 +108,13 @@ export function MonthView({ days, location, year, month, birthdayNakshatras, shr
               <span className="cal-ml-day text-kerala-700 font-medium leading-tight mt-0.5 flex-shrink-0">
                 {day.malayalamDay}
               </span>
+
+              {/* Malayalam month name — only on the 1st day of each month */}
+              {day.malayalamDay === 1 && (
+                <span className="text-[7px] text-kerala-500 font-semibold leading-none flex-shrink-0 truncate w-full">
+                  {MALAYALAM_MONTHS[day.malayalamMonth].english.slice(0, 7)}
+                </span>
+              )}
 
               {/* Nakshatra name — full, truncated by CSS overflow */}
               <span

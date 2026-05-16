@@ -7,6 +7,7 @@ import { MonthView } from './MonthView'
 import type { PanchangamDay } from '../models/PanchangamDay'
 import type { GeoLocation } from '../models/CoreTypes'
 import type { PersonProfile } from '../models/FamilyTypes'
+import { MALAYALAM_MONTHS } from '../models/MalayalamCalendar'
 
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
@@ -32,6 +33,17 @@ export function CalendarTab({ days, isLoading, location, year, onChangeYear, pro
     else setMonth(m => m + 1)
   }
 
+  const mlMonthsThisView = (() => {
+    const seen = new Set<number>()
+    for (const d of days) {
+      const local = new Date(d.date.toLocaleString('en-US', { timeZone: location.timeZoneId }))
+      if (local.getFullYear() === year && local.getMonth() === month) {
+        seen.add(d.malayalamMonth)
+      }
+    }
+    return [...seen].map(m => MALAYALAM_MONTHS[m].english)
+  })()
+
   // Build sets for birthday and shraddham nakshatra overlays (O(1) cell lookup)
   const birthdayNakshatras = new Set<number>()
   const shraddhamNakshatras = new Set<number>()
@@ -55,6 +67,11 @@ export function CalendarTab({ days, isLoading, location, year, onChangeYear, pro
         <div className="text-center">
           <div className="font-semibold text-stone-800">{MONTH_NAMES[month]}</div>
           <div className="text-xs text-stone-500">{year}</div>
+          {mlMonthsThisView.length > 0 && (
+            <div className="text-[10px] text-kerala-600 font-medium mt-0.5">
+              {mlMonthsThisView.join(' · ')}
+            </div>
+          )}
         </div>
 
         <button onClick={nextMonth} className="w-8 h-8 flex items-center justify-center rounded-full active:bg-stone-100">

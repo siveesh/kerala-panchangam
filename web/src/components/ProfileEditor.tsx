@@ -10,11 +10,14 @@ import type { PanchangamDay } from '../models/PanchangamDay'
 import { NAKSHATRAS, MALAYALAM_MONTHS, TITHIS } from '../models/MalayalamCalendar'
 import type { NakshatraId, MalayalamMonthId, TithiId } from '../models/MalayalamCalendar'
 import { calculateDay } from '../engine/PanchangamCalculator'
-import { DEFAULT_LOCATION } from '../models/CoreTypes'
+import { KERALA_DISTRICTS, MAJOR_CITIES, INTERNATIONAL_CITIES, DEFAULT_LOCATION } from '../models/CoreTypes'
+import type { GeoLocation } from '../models/CoreTypes'
 import { nakshatraFromLongitude } from '../models/MalayalamCalendar'
 import { siderealMoonLongitude, lahiriAyanamsa } from '../engine/AstronomyEngine'
 import { tropicalGeocentricLongitude } from '../engine/PlanetaryCalculator'
 import { julianDay, normalise } from '../utils/math'
+
+const ALL_LOCATIONS = [...KERALA_DISTRICTS, ...MAJOR_CITIES, ...INTERNATIONAL_CITIES]
 
 interface Props {
   profile: PersonProfile
@@ -108,11 +111,19 @@ function combineDateTimeToISO(dateStr: string, timeStr: string, tzId = 'Asia/Kol
 // ---------------------------------------------------------------------------
 export function ProfileEditor({ profile, days, onSave, onCancel, onDelete }: Props) {
   const [draft, setDraft] = useState<PersonProfile>({ ...profile })
+  const [birthLocation, setBirthLocation] = useState<GeoLocation>(() => {
+    const stored = draft.birthDetails?.birthLocationName
+    return ALL_LOCATIONS.find(l => l.name === stored) ?? DEFAULT_LOCATION
+  })
+  const [deathLocation, setDeathLocation] = useState<GeoLocation>(() => {
+    const stored = draft.deathDetails?.deathLocationName
+    return ALL_LOCATIONS.find(l => l.name === stored) ?? DEFAULT_LOCATION
+  })
   const [birthTimeLocal, setBirthTimeLocal] = useState(() =>
-    isoToLocalHHMM(draft.birthDetails?.birthTimeISO, 'Asia/Kolkata')
+    isoToLocalHHMM(draft.birthDetails?.birthTimeISO, draft.birthDetails?.birthTimeZoneId ?? 'Asia/Kolkata')
   )
   const [deathTimeLocal, setDeathTimeLocal] = useState(() =>
-    isoToLocalHHMM(draft.deathDetails?.deathTimeISO, 'Asia/Kolkata')
+    isoToLocalHHMM(draft.deathDetails?.deathTimeISO, draft.deathDetails?.deathTimeZoneId ?? 'Asia/Kolkata')
   )
   const [isSaving, setIsSaving] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
@@ -146,7 +157,7 @@ export function ProfileEditor({ profile, days, onSave, onCancel, onDelete }: Pro
     if (!draft.birthDetails?.dateOfBirth) return
     setIsCalculating(true)
     try {
-      const loc = DEFAULT_LOCATION
+      const loc = birthLocation
       let nakshatra: NakshatraId
       let isoTime: string | undefined
 
@@ -173,6 +184,10 @@ export function ProfileEditor({ profile, days, onSave, onCancel, onDelete }: Pro
         birthMalayalamDay: day.malayalamDay,
         birthKollavarshamYear: day.kollavarshamYear,
         birthTimeISO: isoTime,
+        birthLocationName: loc.name,
+        birthLatitude: loc.latitude,
+        birthLongitude: loc.longitude,
+        birthTimeZoneId: loc.timeZoneId,
         nakshatraEntry: 'calculated',
         tithiEntry: 'calculated',
       })
@@ -185,7 +200,7 @@ export function ProfileEditor({ profile, days, onSave, onCancel, onDelete }: Pro
     if (!draft.deathDetails?.dateOfDeath) return
     setIsCalculating(true)
     try {
-      const loc = DEFAULT_LOCATION
+      const loc = deathLocation
       let nakshatra: NakshatraId
       let isoTime: string | undefined
 
@@ -209,6 +224,10 @@ export function ProfileEditor({ profile, days, onSave, onCancel, onDelete }: Pro
         deathMalayalamDay: day.malayalamDay,
         deathKollavarshamYear: day.kollavarshamYear,
         deathTimeISO: isoTime,
+        deathLocationName: loc.name,
+        deathLatitude: loc.latitude,
+        deathLongitude: loc.longitude,
+        deathTimeZoneId: loc.timeZoneId,
         nakshatraEntry: 'calculated',
         tithiEntry: 'calculated',
       })
@@ -266,8 +285,30 @@ export function ProfileEditor({ profile, days, onSave, onCancel, onDelete }: Pro
               onChange={e => updateBirth({ dateOfBirth: e.target.value })} />
           </Field>
 
+          <Field label="Place of Birth"
+            hint={`Nakshatra calculated using ${birthLocation.timeZoneId} timezone. Change if born outside India.`}>
+            <select className={selectCls}
+              value={birthLocation.name}
+              onChange={e => {
+                const loc = ALL_LOCATIONS.find(l => l.name === e.target.value)
+                if (loc) setBirthLocation(loc)
+              }}>
+              <optgroup label="Kerala Districts">
+                {KERALA_DISTRICTS.map(l => <option key={l.name} value={l.name}>{l.name}</option>)}
+              </optgroup>
+              <optgroup label="Major Cities">
+                {MAJOR_CITIES.map(l => <option key={l.name} value={l.name}>{l.name}</option>)}
+              </optgroup>
+              <optgroup label="International">
+                {INTERNATIONAL_CITIES.map(l => <option key={l.name} value={l.name}>{l.name}</option>)}
+              </optgroup>
+            </select>
+          </Field>
+
           <Field label="Time of Birth"
-            hint={birthTimeLocal ? 'Nakshatra will be calculated at this exact time (IST).' : 'Optional — if unknown, sunrise nakshatra is used.'}>
+            hint={birthTimeLocal
+              ? `Time in ${birthLocation.name} (${birthLocation.timeZoneId}). Nakshatra at this exact moment.`
+              : `Optional. Sunrise nakshatra at ${birthLocation.name} used when unknown.`}>
             <input className={inputCls} type="time" value={birthTimeLocal}
               onChange={e => setBirthTimeLocal(e.target.value)} />
           </Field>
@@ -285,7 +326,7 @@ export function ProfileEditor({ profile, days, onSave, onCancel, onDelete }: Pro
                   {bd.birthMalayalamMonth !== undefined && bd.birthMalayalamDay !== undefined && (
                     <> · {MALAYALAM_MONTHS[bd.birthMalayalamMonth].english} {bd.birthMalayalamDay}, {bd.birthKollavarshamYear}</>
                   )}
-                  {birthTimeLocal && <> · {birthTimeLocal} IST</>}
+                  {birthTimeLocal && <> · {birthTimeLocal} {birthLocation.timeZoneId.split('/').pop()?.replace('_', ' ')}</>}
                 </p>
               )}
             </div>
@@ -355,8 +396,30 @@ export function ProfileEditor({ profile, days, onSave, onCancel, onDelete }: Pro
                   onChange={e => updateDeath({ dateOfDeath: e.target.value })} />
               </Field>
 
+              <Field label="Place of Death"
+                hint={`Time interpreted in ${deathLocation.timeZoneId} timezone.`}>
+                <select className={selectCls}
+                  value={deathLocation.name}
+                  onChange={e => {
+                    const loc = ALL_LOCATIONS.find(l => l.name === e.target.value)
+                    if (loc) setDeathLocation(loc)
+                  }}>
+                  <optgroup label="Kerala Districts">
+                    {KERALA_DISTRICTS.map(l => <option key={l.name} value={l.name}>{l.name}</option>)}
+                  </optgroup>
+                  <optgroup label="Major Cities">
+                    {MAJOR_CITIES.map(l => <option key={l.name} value={l.name}>{l.name}</option>)}
+                  </optgroup>
+                  <optgroup label="International">
+                    {INTERNATIONAL_CITIES.map(l => <option key={l.name} value={l.name}>{l.name}</option>)}
+                  </optgroup>
+                </select>
+              </Field>
+
               <Field label="Time of Death"
-                hint={deathTimeLocal ? 'Nakshatra will be calculated at this exact time (IST).' : 'Optional — if unknown, sunrise nakshatra is used.'}>
+                hint={deathTimeLocal
+                  ? `Time in ${deathLocation.name} (${deathLocation.timeZoneId}).`
+                  : `Optional. Sunrise nakshatra at ${deathLocation.name} used when unknown.`}>
                 <input className={inputCls} type="time" value={deathTimeLocal}
                   onChange={e => setDeathTimeLocal(e.target.value)} />
               </Field>
@@ -373,7 +436,7 @@ export function ProfileEditor({ profile, days, onSave, onCancel, onDelete }: Pro
                       {dd.deathMalayalamMonth !== undefined && dd.deathMalayalamDay !== undefined && (
                         <> · {MALAYALAM_MONTHS[dd.deathMalayalamMonth].english} {dd.deathMalayalamDay}, {dd.deathKollavarshamYear}</>
                       )}
-                      {deathTimeLocal && <> · {deathTimeLocal} IST</>}
+                      {deathTimeLocal && <> · {deathTimeLocal} {deathLocation.timeZoneId.split('/').pop()?.replace('_', ' ')}</>}
                     </p>
                   )}
                 </div>
