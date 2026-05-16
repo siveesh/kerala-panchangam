@@ -299,33 +299,68 @@ struct FamilyView: View {
         }
     }
 
+    // MARK: - Calendar / Reminders buttons
+
+    /// The selected profile (if any) — used to scope exports to a single person.
+    private var selectedProfile: PersonProfile? {
+        guard let id = viewModel.selectedProfileID else { return nil }
+        return viewModel.profiles.first { $0.id == id }
+    }
+
     private var scheduleAllButton: some View {
         HStack(spacing: 8) {
-            Button {
-                Task {
-                    await viewModel.addToCalendar()
-                    showScheduleConfirmation = true
+            if let profile = selectedProfile {
+                // ── Single-profile export (avoids re-adding other profiles) ──
+                Button {
+                    Task {
+                        await viewModel.addToCalendar(profile: profile)
+                        showScheduleConfirmation = true
+                    }
+                } label: {
+                    Label("Add \(profile.displayName) to Calendar", systemImage: "calendar.badge.plus")
                 }
-            } label: {
-                Label("Add to Apple Calendar", systemImage: "calendar.badge.plus")
-            }
-            .disabled(viewModel.days.isEmpty || viewModel.activeProfiles.isEmpty)
-            .help(viewModel.days.isEmpty
-                  ? "Load a Panchangam year first"
-                  : "Add family birthday and Śrāddham events to Apple Calendar")
+                .disabled(viewModel.days.isEmpty)
+                .help("Add only \(profile.displayName)'s events to Apple Calendar — existing events for other profiles are not touched")
 
-            Button {
-                Task {
-                    await viewModel.addToReminders()
-                    showRemindersConfirmation = true
+                Button {
+                    Task {
+                        await viewModel.addToReminders(profile: profile)
+                        showRemindersConfirmation = true
+                    }
+                } label: {
+                    Label("Save \(profile.displayName) to Reminders", systemImage: "bell.badge")
                 }
-            } label: {
-                Label("Save to Reminders", systemImage: "bell.badge")
+                .disabled(viewModel.days.isEmpty)
+                .help("Save only \(profile.displayName)'s reminders")
+
+            } else {
+                // ── All-profiles export (shown when no specific profile is selected) ──
+                Button {
+                    Task {
+                        await viewModel.addToCalendar()
+                        showScheduleConfirmation = true
+                    }
+                } label: {
+                    Label("Add All to Apple Calendar", systemImage: "calendar.badge.plus")
+                }
+                .disabled(viewModel.days.isEmpty || viewModel.activeProfiles.isEmpty)
+                .help(viewModel.days.isEmpty
+                      ? "Load a Panchangam year first"
+                      : "Add all profiles' events to Apple Calendar (duplicates are skipped automatically)")
+
+                Button {
+                    Task {
+                        await viewModel.addToReminders()
+                        showRemindersConfirmation = true
+                    }
+                } label: {
+                    Label("Save All to Reminders", systemImage: "bell.badge")
+                }
+                .disabled(viewModel.days.isEmpty || viewModel.activeProfiles.isEmpty)
+                .help(viewModel.days.isEmpty
+                      ? "Load a Panchangam year first"
+                      : "Save all profiles' reminders to the Reminders page")
             }
-            .disabled(viewModel.days.isEmpty || viewModel.activeProfiles.isEmpty)
-            .help(viewModel.days.isEmpty
-                  ? "Load a Panchangam year first"
-                  : "Save family reminders to the Reminders page and schedule notifications")
         }
     }
 

@@ -478,6 +478,51 @@ final class FamilyViewModel {
         }
     }
 
+    /// Adds events for a single profile to Apple Calendar.
+    /// Existing events for that person are skipped automatically (deduplication in EventKitCalendarService).
+    func addToCalendar(profile: PersonProfile) async {
+        guard !days.isEmpty else {
+            errorMessage = "Load a Panchangam year first before exporting events."
+            return
+        }
+        isLoading = true
+        defer { isLoading = false }
+        let extendedDays = await futureDays()
+        let now = Date()
+        let policy = profile.reminderPreferences.birthdayNakshatraPolicy
+        async let bEvents = eventGenerator.birthdayEvents(
+            for: profile, in: extendedDays, policy: policy, threshold: duplicateNakshatraThreshold)
+        async let sEvents = eventGenerator.shraddhamEvents(
+            for: profile, in: extendedDays, mode: shraddhamObservanceMode)
+        let events = await (bEvents + sEvents).filter { $0.startDate > now }
+        do {
+            try await calendarService.addEvents(events)
+        } catch {
+            errorMessage = "Calendar export failed: \(error.localizedDescription)"
+        }
+    }
+
+    /// Adds reminders for a single profile to the Reminders page and schedules OS notifications.
+    func addToReminders(profile: PersonProfile) async {
+        guard !days.isEmpty else {
+            errorMessage = "Load a Panchangam year first before saving reminders."
+            return
+        }
+        isLoading = true
+        defer { isLoading = false }
+        let extendedDays = await futureDays()
+        let now = Date()
+        let policy = profile.reminderPreferences.birthdayNakshatraPolicy
+        async let bAlerts = eventGenerator.birthdayAlerts(
+            for: profile, in: extendedDays, policy: policy, threshold: duplicateNakshatraThreshold)
+        async let sAlerts = eventGenerator.shraddhamAlerts(
+            for: profile, in: extendedDays, mode: shraddhamObservanceMode)
+        let alerts = await (bAlerts + sAlerts).filter { $0.fireDate > now }
+        for alert in alerts {
+            try? await notificationService.schedule(alert: alert)
+        }
+    }
+
     /// Saves family reminders to the app's Reminders page and schedules OS notifications.
     func addToReminders() async {
         guard !days.isEmpty else {
