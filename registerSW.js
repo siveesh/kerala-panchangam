@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/kerala-panchangam/sw.js', { scope: '/kerala-panchangam/' })})}
