@@ -14,8 +14,9 @@ import { NAKSHATRAS, MALAYALAM_MONTHS, TITHIS } from '../models/MalayalamCalenda
 // Birthday events
 // ---------------------------------------------------------------------------
 export function birthdayEvents(profile: PersonProfile, days: PanchangamDay[]): FamilyCalendarEvent[] {
+  // No star-birthday events for deceased — only Śrāddham applies
+  if (profile.deathDetails) return []
   const birth = profile.birthDetails
-  if (!birth?.birthNakshatra !== false && birth?.birthNakshatra === undefined) return []
   if (birth?.birthNakshatra === undefined || birth?.birthMalayalamMonth === undefined) return []
 
   const nakshatra = birth.birthNakshatra

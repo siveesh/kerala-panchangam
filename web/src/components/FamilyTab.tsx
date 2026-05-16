@@ -156,8 +156,11 @@ function ProfileRow({ profile, days, onEdit }: { profile: PersonProfile; days: P
   const name = profile.nickname.trim() !== '' ? profile.nickname : profile.fullName
   const deceased = !!profile.deathDetails
 
-  // Events can only be generated when Calculate has been run (nakshatra + malayalam month both set)
-  const canExportBirthday = profile.birthDetails?.birthNakshatra !== undefined
+  // Show export button when there's any calculable data:
+  // • Living person with nakshatra + birth month set (manually or via Calculate)
+  // • Deceased person with death nakshatra or tithi set
+  const canExportBirthday = !profile.deathDetails
+    && profile.birthDetails?.birthNakshatra !== undefined
     && profile.birthDetails?.birthMalayalamMonth !== undefined
   const canExportShraddham = !!profile.deathDetails
     && (profile.deathDetails.deathNakshatra !== undefined || profile.deathDetails.deathTithi !== undefined)
@@ -176,8 +179,9 @@ function ProfileRow({ profile, days, onEdit }: { profile: PersonProfile; days: P
     if (events.length === 0) {
       alert(
         `No events generated for ${name}.\n\n` +
-        `Make sure you tapped "Calculate" in the profile editor so the ` +
-        `birth/death nakshatra and Malayalam month are set.`
+        `For star birthdays: nakshatra and birth month must both be set ` +
+        `(either via Calculate or the manual dropdowns).\n\n` +
+        `For Śrāddham: the person must be marked Deceased with a death nakshatra or tithi.`
       )
       return
     }

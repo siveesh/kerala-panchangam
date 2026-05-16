@@ -25,6 +25,26 @@ interface Props {
 }
 
 // ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+/** Convert a UTC ISO string back to local HH:MM in the given timezone for display. */
+function isoToLocalHHMM(iso: string | undefined, tzId: string): string {
+  if (!iso) return ''
+  try {
+    const d = new Date(iso)
+    const fmt = new Intl.DateTimeFormat('en-US', {
+      timeZone: tzId, hour: '2-digit', minute: '2-digit', hour12: false,
+    })
+    const parts = Object.fromEntries(fmt.formatToParts(d).map(p => [p.type, p.value]))
+    // hour12:false on midnight gives "24:00" in some browsers — normalise
+    return `${parts.hour === '24' ? '00' : parts.hour}:${parts.minute}`
+  } catch {
+    return ''
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Layout helpers
 // ---------------------------------------------------------------------------
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -88,16 +108,12 @@ function combineDateTimeToISO(dateStr: string, timeStr: string, tzId = 'Asia/Kol
 // ---------------------------------------------------------------------------
 export function ProfileEditor({ profile, days, onSave, onCancel, onDelete }: Props) {
   const [draft, setDraft] = useState<PersonProfile>({ ...profile })
-  const [birthTimeLocal, setBirthTimeLocal] = useState(() => {
-    if (!draft.birthDetails?.birthTimeISO) return ''
-    const d = new Date(draft.birthDetails.birthTimeISO)
-    return `${String(d.getUTCHours()).padStart(2,'0')}:${String(d.getUTCMinutes()).padStart(2,'0')}`
-  })
-  const [deathTimeLocal, setDeathTimeLocal] = useState(() => {
-    if (!draft.deathDetails?.deathTimeISO) return ''
-    const d = new Date(draft.deathDetails.deathTimeISO)
-    return `${String(d.getUTCHours()).padStart(2,'0')}:${String(d.getUTCMinutes()).padStart(2,'0')}`
-  })
+  const [birthTimeLocal, setBirthTimeLocal] = useState(() =>
+    isoToLocalHHMM(draft.birthDetails?.birthTimeISO, 'Asia/Kolkata')
+  )
+  const [deathTimeLocal, setDeathTimeLocal] = useState(() =>
+    isoToLocalHHMM(draft.deathDetails?.deathTimeISO, 'Asia/Kolkata')
+  )
   const [isSaving, setIsSaving] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [isCalculating, setIsCalculating] = useState(false)

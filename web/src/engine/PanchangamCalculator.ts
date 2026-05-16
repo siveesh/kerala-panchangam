@@ -63,7 +63,10 @@ export function calculateDay(date: Date, location: GeoLocation, mode: Calculatio
 export async function calculateYear(year: number, location: GeoLocation, mode: CalculationMode = 'keralaTraditional'): Promise<PanchangamDay[]> {
   const days: PanchangamDay[] = []
   const isLeap = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
-  const numDays = isLeap ? 366 : 365
+  // Extend 45 days into the next year so late Malayalam months (Dhanu: Dec 17–Jan 13,
+  // Makaram: Jan 14–Feb 11) are fully covered for star-birthday and Śrāddham generation.
+  // The calendar view already filters by month/year so extra days are invisible in the grid.
+  const numDays = (isLeap ? 366 : 365) + 45
 
   for (let d = 0; d < numDays; d++) {
     // Build the UTC date for noon on day d (avoids DST/TZ edge cases)
