@@ -6,7 +6,7 @@ import { usePanchangam } from './hooks/usePanchangam'
 import { useProfiles } from './hooks/useProfiles'
 import { loadPreferences, savePreferences } from './store/PreferencesStore'
 import type { AppPreferences } from './models/CoreTypes'
-import type { AppSection } from './models/CoreTypes'
+import { DEFAULT_REMINDER_PREFS } from './models/FamilyTypes'
 
 type Tab = 'calendar' | 'family' | 'settings'
 
@@ -22,7 +22,25 @@ export default function App() {
   }, [])
 
   const { days, isLoading, year, loadYear } = usePanchangam(prefs)
-  const { profiles, saveProfile, deleteProfile, importProfiles, exportProfiles, createProfile } = useProfiles()
+
+  // createProfile factory uses current prefs for default policy/mode
+  const createProfileWithPrefs = useCallback(() => ({
+    id: crypto.randomUUID(),
+    fullName: '',
+    nickname: '',
+    relationshipTag: '',
+    notes: '',
+    reminderPreferences: {
+      ...DEFAULT_REMINDER_PREFS,
+      birthdayNakshatraPolicy: prefs.defaultNakshatraPolicy,
+      shraddhamMode: prefs.defaultShraddhamMode,
+    },
+    isArchived: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }), [prefs.defaultNakshatraPolicy, prefs.defaultShraddhamMode])
+
+  const { profiles, saveProfile, deleteProfile, importProfiles, exportProfiles } = useProfiles()
 
   return (
     <div className="flex flex-col h-svh max-w-lg mx-auto bg-stone-50 relative">
@@ -36,6 +54,7 @@ export default function App() {
             year={year}
             onChangeYear={loadYear}
             profiles={profiles}
+            nakshatraInMalayalam={prefs.nakshatraInMalayalam}
           />
         )}
         {tab === 'family' && (
@@ -46,7 +65,7 @@ export default function App() {
             onDelete={deleteProfile}
             onImport={importProfiles}
             onExport={exportProfiles}
-            createProfile={createProfile}
+            createProfile={createProfileWithPrefs}
           />
         )}
         {tab === 'settings' && (

@@ -17,9 +17,10 @@ interface Props {
   year: number
   onChangeYear: (y: number) => void
   profiles: PersonProfile[]
+  nakshatraInMalayalam: boolean
 }
 
-export function CalendarTab({ days, isLoading, location, year, onChangeYear, profiles }: Props) {
+export function CalendarTab({ days, isLoading, location, year, onChangeYear, profiles, nakshatraInMalayalam }: Props) {
   const [month, setMonth] = useState(() => new Date().getMonth())
 
   function prevMonth() {
@@ -31,7 +32,7 @@ export function CalendarTab({ days, isLoading, location, year, onChangeYear, pro
     else setMonth(m => m + 1)
   }
 
-  // Build sets for birthday and shraddham nakshatra overlays
+  // Build sets for birthday and shraddham nakshatra overlays (O(1) cell lookup)
   const birthdayNakshatras = new Set<number>()
   const shraddhamNakshatras = new Set<number>()
   for (const p of profiles) {
@@ -77,6 +78,7 @@ export function CalendarTab({ days, isLoading, location, year, onChangeYear, pro
             month={month}
             birthdayNakshatras={birthdayNakshatras}
             shraddhamNakshatras={shraddhamNakshatras}
+            nakshatraInMalayalam={nakshatraInMalayalam}
           />
         )}
       </div>

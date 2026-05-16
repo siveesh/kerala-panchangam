@@ -5,7 +5,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import * as FamilyStore from '../store/FamilyStore'
 import type { PersonProfile } from '../models/FamilyTypes'
-import { DEFAULT_REMINDER_PREFS } from '../models/FamilyTypes'
 
 export function useProfiles() {
   const [profiles, setProfiles] = useState<PersonProfile[]>([])
@@ -43,17 +42,5 @@ export function useProfiles() {
     return FamilyStore.exportBackupJSON(profiles)
   }, [profiles])
 
-  const createProfile = useCallback((): PersonProfile => ({
-    id: crypto.randomUUID(),
-    fullName: '',
-    nickname: '',
-    relationshipTag: '',
-    notes: '',
-    reminderPreferences: { ...DEFAULT_REMINDER_PREFS },
-    isArchived: false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  }), [])
-
-  return { profiles, isLoading, saveProfile, deleteProfile, importProfiles, exportProfiles, createProfile }
+  return { profiles, isLoading, saveProfile, deleteProfile, importProfiles, exportProfiles }
 }

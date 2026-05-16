@@ -75,6 +75,12 @@ export interface AppPreferences {
   calculationMode: CalculationMode
   language: LanguagePreference
   ayanamsa: AyanamsaSelection
+  /** Default duplicate-nakshatra policy applied to new profiles */
+  defaultNakshatraPolicy: 'alwaysFirst' | 'alwaysSecond' | 'longestDuration' | 'preferSecondUnlessShort'
+  /** Default Śrāddham observance mode applied to new profiles */
+  defaultShraddhamMode: 'nakshatraOnly' | 'nakshatraPreferred' | 'tithiPreferred' | 'tithiAndNakshatra'
+  /** Show nakshatra names in Malayalam script on calendar cells */
+  nakshatraInMalayalam: boolean
 }
 
 export const DEFAULT_PREFERENCES: AppPreferences = {
@@ -82,4 +88,7 @@ export const DEFAULT_PREFERENCES: AppPreferences = {
   calculationMode: 'keralaTraditional',
   language: 'english',
   ayanamsa: 'lahiri',
+  defaultNakshatraPolicy: 'alwaysSecond',
+  defaultShraddhamMode: 'nakshatraOnly',
+  nakshatraInMalayalam: false,
 }
